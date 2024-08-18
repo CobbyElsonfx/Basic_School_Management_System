@@ -49,4 +49,19 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+
+    public function redirectBasedOnRole(){
+        $user = Auth::user();
+        if ($user->role === 'Admin') {
+            return redirect()->route('admin.dashboard');
+        } elseif ($user->role === 'Teacher') {
+            return redirect()->route('teacher.dashboard');
+        } elseif ($user->role === 'Student/Parent') {
+            return redirect()->route('student.dashboard');
+        }
+
+        // Default fallback
+        return redirect()->route('/');
+
+    }
 }

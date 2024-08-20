@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use App\Http\Middleware\RoleMiddleware; // Added the missing semicolon
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -14,7 +15,12 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             \App\Http\Middleware\HandleInertiaRequests::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
-        ]); //
+        ]);
+
+        // If you want to register middleware aliases globally
+        $middleware->alias([
+            'role' => RoleMiddleware::class, // Correct alias registration
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {//
     })->create();

@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        return $this->redirectBasedOnRole();
     }
 
     /**
@@ -53,11 +53,11 @@ class AuthenticatedSessionController extends Controller
     public function redirectBasedOnRole(){
         $user = Auth::user();
         if ($user->role === 'Admin') {
-            return redirect()->route('admin.dashboard');
+            return redirect()->intended(route('admin.dashboard', absolute: false));
         } elseif ($user->role === 'Teacher') {
-            return redirect()->route('teacher.dashboard');
+            return redirect()->intended(route('teacher.dashboard', absolute: false));
         } elseif ($user->role === 'Student/Parent') {
-            return redirect()->route('student.dashboard');
+            return redirect()->intended(route('student.dashboard', absolute: false));
         }
 
         // Default fallback

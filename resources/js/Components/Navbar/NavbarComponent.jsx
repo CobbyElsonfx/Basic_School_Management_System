@@ -14,13 +14,13 @@ const NavbarComponent = () => {
                 <Navbar.Collapse>
 
                     <Navbar.Link as={Link}>
-                        <Link href={route("dashboard")} active>
+                        <Link href={route("admin.dashboard")} active>
                             Home
                         </Link>
                     </Navbar.Link>
                     <Navbar.Link as={Link}>
-                        <Link href='#about' active>
-                            About
+                        <Link href={route('register')} active>
+                            Register
                         </Link>
                     </Navbar.Link>
                     <Navbar.Link as={Link}>

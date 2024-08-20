@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
+use Log;
 
 class RegisteredUserController extends Controller
 {
@@ -30,20 +31,31 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+
+        Log::info('Request Body:', $request->all());
         $request->validate([
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'role' => ['required', 'string', 'in:Admin,Teacher,Student/Parent'], // Adjust roles as needed
+
         ]);
+
+        
 
         $user = User::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $request->role, // Include role
+
+
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        Log::info($user);
+
+        return redirect(route('admin.dashboard', absolute: false));
     }
 }

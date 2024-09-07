@@ -13,9 +13,7 @@ use Inertia\Response;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
+
     public function create(): Response
     {
         return Inertia::render('Auth/Login', [
@@ -27,14 +25,36 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
+    /**
+ * Handle an incoming authentication request.
+ */
+public function store(LoginRequest $request): RedirectResponse
+{
+    $credentials = $request->only('email', 'password');
 
-        $request->session()->regenerate();
-
-        return $this->redirectBasedOnRole();
+    if (!Auth::attempt($credentials)) {
+        return redirect()->back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
     }
+
+    $user = Auth::user();
+
+    // Check if the selected role matches the authenticated user's role
+    if ($user->role !== $request->input('role')) {
+        Auth::logout(); // Logout the user if roles don't match
+        return redirect()->back()->withErrors([
+            'role' => 'The selected role does not match your account.',
+        ]);
+    }
+
+    // Regenerate session to prevent session fixation
+    $request->session()->regenerate();
+
+    // Redirect based on role
+    return $this->redirectBasedOnRole();
+}
+
 
     /**
      * Destroy an authenticated session.
@@ -47,8 +67,9 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return to_route('home');
     }
+
 
     public function redirectBasedOnRole(){
         $user = Auth::user();
@@ -56,12 +77,11 @@ class AuthenticatedSessionController extends Controller
             return redirect()->intended(route('admin.dashboard', absolute: false));
         } elseif ($user->role === 'Teacher') {
             return redirect()->intended(route('teacher.dashboard', absolute: false));
-        } elseif ($user->role === 'Student/Parent') {
+        } elseif ($user->role === 'Student') {
             return redirect()->intended(route('student.dashboard', absolute: false));
         }
-
         // Default fallback
-        return redirect()->route('/');
+        return to_route('login');
 
     }
 }

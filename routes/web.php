@@ -15,14 +15,12 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('home');
 
 // Authenticated and verified routes
 Route::middleware(['auth', 'verified'])->group(function () {
     
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+  
 
     // Role-based dashboard routes
     Route::middleware(['role:Admin'])->group(function () {

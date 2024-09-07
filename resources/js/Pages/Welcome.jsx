@@ -27,7 +27,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                 </span>
             </a>
           <h1 className="mb-4 text-3xl font-extrabold tracking-tight leading-none text-gray-900 md:text-4xl lg:text-6xl dark:text-white">
-                All in one Place Management System
+                All in one, Management System
             </h1>
             <p className="mb-8 text-md font-normal text-gray-500 lg:text-md w-[70%] dark:text-gray-400">
                 Here at Flowbite we focus on markets where technology,

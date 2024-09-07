@@ -13,21 +13,20 @@ const NavbarComponent = () => {
                 <Navbar.Toggle />
                 <Navbar.Collapse>
 
-                    <Navbar.Link as={Link}>
-                        <Link href={route("admin.dashboard")} active>
+                        <Link href={route("admin.dashboard")} >
                             Home
                         </Link>
-                    </Navbar.Link>
-                    <Navbar.Link as={Link}>
-                        <Link href={route('register')} active>
+                    
+                    
+                        <Link href={route('register')} active >
                             Register
                         </Link>
-                    </Navbar.Link>
-                    <Navbar.Link as={Link}>
-                        <Link href={route("login")} active>
+                    
+                    
+                        <Link href={route('login')} active>
                             Login
                         </Link>
-                    </Navbar.Link>
+                    
                 </Navbar.Collapse>
             </Navbar>
             <hr />

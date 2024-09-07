@@ -61,7 +61,7 @@ export default function Login({ status, canResetPassword }) {
                             options={[
                                 { value: "Admin", label: "Admin" },
                                 {
-                                    value: "Student/Parent",
+                                    value: "Student",
                                     label: "Student/Parent",
                                 },
                                 { value: "Teacher", label: "Teacher" },

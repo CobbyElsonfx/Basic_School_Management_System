@@ -1,14 +1,17 @@
 import React from 'react';
+import { Head , Link} from '@inertiajs/react';
 
-const Dashboard = () => {
+
+const StudentDashboard = () => {
   return (
     <div>
       <header>
-        <h1>Dashboard</h1>
+        <h1>Wecloe to the students Dashbaord</h1>
       </header>
       <section>
         <h2>Section 1</h2>
-        <p>This is the first section.</p>
+        <Link href={route('logout')} method='post'> logout </Link>
+
       </section>
       <section>
         <h2>Section 2</h2>
@@ -22,4 +25,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default StudentDashboard;

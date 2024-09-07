@@ -36,7 +36,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required', 'string', 'in:Admin,Teacher,Student/Parent'], // Adjust roles as needed
+            'role' => ['required', 'string', 'in:Admin,Teacher,Student'], // Adjust roles as needed
 
         ]);
 

@@ -1,9 +1,13 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Admin\FeeController
+use App\Http\Controllers\Admin\FeeController;
+use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\StudentManagementController;
+use App\Http\Controllers\Admin\ExamController;
+use App\Http\Controllers\Admin\MessageController;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,7 +40,7 @@ Route::middleware(["auth", "verified"])->group(function(){
 
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
-    
+
     Route::prefix('admin/students')->group(function () {
         // Route::resource('students', StudentController::class);  // CRUD for students
         Route::get('enrollment', [StudentManagementController::class, 'enrollment'])->name('admin.students.enrollment');
@@ -55,8 +59,8 @@ Route::middleware(["auth", "verified"])->group(function(){
     // Employee Management Routes
     Route::prefix('admin/employees')->group(function () {
         Route::resource('employees', EmployeeController::class);  // CRUD for employee records, etc.
-        Route::get('salary', [EmployeeManagementController::class, 'salary'])->name('admin.employees.salary');
-        Route::get('reports', [EmployeeManagementController::class, 'reports'])->name('admin.employees.reports');
+        Route::get('salary', [EmployeeController::class, 'salary'])->name('admin.employees.salary');
+        Route::get('reports', [EmployeeController::class, 'reports'])->name('admin.employees.reports');
     });
     
     // Examination Management Routes

@@ -11,10 +11,8 @@ class AdmissionController extends Controller
 {
     public function index()
     {
-        $admissions = Student::all();
-        return Inertia::render('Admin/Admissions/Index', [
-            'admissions' => $admissions
-        ]);
+      
+        return Inertia::render('Admin/pages/Students/admissionManagement/admission');
     }
 
     public function create()

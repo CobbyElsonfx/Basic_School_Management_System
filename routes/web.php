@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\StudentManagementController;
 use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\AdmissionController;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +32,7 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::delete('/profile', [ProfileController:: class, 'destroy'])->name('profile.destroy');
 });
 
 
@@ -43,7 +44,7 @@ Route::middleware(["auth", "verified"])->group(function(){
 
     Route::prefix('admin/students')->group(function () {
         // Route::resource('students', StudentController::class);  // CRUD for students
-        Route::get('enrollment', [StudentManagementController::class, 'enrollment'])->name('admin.students.enrollment');
+        Route::get('admissions', [AdmissionController::class, 'index'])->name('admin.students.admissions');
         Route::get('transfer', [StudentManagementController::class, 'transfer'])->name('admin.students.transfer');
         Route::get('attendance', [StudentManagementController::class, 'attendance'])->name('admin.students.attendance');
         Route::get('behavior', [StudentManagementController::class, 'behavior'])->name('admin.students.behavior');

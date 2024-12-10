@@ -12,7 +12,7 @@ class AdmissionController extends Controller
     public function index()
     {
       
-        return Inertia::render('Admin/pages/Students/admissionManagement/admission');
+        return Inertia::render('Admin/pages/Students/admissionManagement/Admission');
     }
 
     public function create()

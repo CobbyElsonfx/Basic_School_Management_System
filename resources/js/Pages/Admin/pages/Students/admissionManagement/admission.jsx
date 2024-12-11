@@ -118,12 +118,12 @@ const AdmissionForms = () => {
         {/* Step Indicator */}
         <div className="mb-6">
           <p className="text-sm font-medium">
-            Step {currentStep} of 6: <span className="text-primary">{stepTitles[currentStep - 1]}</span>
+            Step {currentStep} of 7: <span className="text-primary">{stepTitles[currentStep - 1]}</span>
           </p>
           <div className="w-full bg-gray-200 rounded-full h-2.5">
             <div
               className="bg-primary h-2.5 rounded-full"
-              style={{ width: `${(currentStep / 6) * 100}%` }}
+              style={{ width: `${(currentStep / 7) * 100}%` }}
             ></div>
           </div>
         </div>
